@@ -1,0 +1,23 @@
+bellman optimality equation describes value of a state in a probabilistic or deterministic case:
+1. V_0 = max(for each a in A)[sum(for each s in S)[p_[a,0->s]*(r_[s,a]+gamma*V_s)]]
+
+in english, this is the action that leads to the state with the highest expected value
+p_[a,0->s] is the probability of action a happening in state 0 and resulting in state S
+in the above, 0 can be inserted for any arbitrary starting state (e.g. state i instead of 0 in the sense that state i goes to one of states S (state i->s))
+
+we can also describe the value of the action for use in Q-learning. action value Q is a less fundamental quantity than the state value V.
+2. Q(s,a) = |E_[s'~S][r(s,a)+gamma*V(s')] = sum(for each next state s' in S)[p_[a,s->s']*(r(s,a)+gamma*V(s'))]
+
+in english, this is the total reward we can get from doing action a in state s, given the probabilities that we will reach each next state s' by doing action a
+
+V can be seen as the best Q in state s,
+3. V(s) = max(for each a in A)[Q(s,a)]
+
+reviewing this will reveal the above formula 3 to be literally (algebraically) true in the sense
+that it is a combination of equations 1 and 2 and not just "seen as" the best Q in state s, this is the definition
+
+Actions can also be defined another way:
+Q(s,a) = r(s,a) + gamma*max(for each a' in A)[Q(s',a')]
+
+In english, this means the action value is the reward for the current state plus the discounted reward gained by
+the best next action and state
