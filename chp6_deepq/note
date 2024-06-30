@@ -1,0 +1,12 @@
+In Q-learning, you:
+1. start with empty table, mapping states to values of actions
+2. obtain s,a,r,s' by interacting with environment where s is state you are leaving, s' is state you go to,
+a is the action to get from s to s', and r is the reward when you get to s' for taking action a to get from s to s'
+3. Update Q(s,a) with the Bellman approximation
+    Q(s,a) <- r + gamma*max(for each a' in A)[Q(s',a')]
+4. Repeat from step 2.
+
+3 is done differently in practice in order to keep training stable:
+3. Q(s,a) <- (1-alpha)*Q(s,a) + alpha * (r + gamma*max(for each a' in A)[Q(s',a')])
+
+essentially the new Q(s,a) is a blend of the new and the old according to the ratio parameter alpha
